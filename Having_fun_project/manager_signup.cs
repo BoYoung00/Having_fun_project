@@ -11,23 +11,20 @@ using System.Windows.Forms;
 
 namespace Having_fun_project
 {
-    public partial class user_signup : Form
+    public partial class manager_signup : Form
     {
-        public user_signup()
+  
+        public manager_signup()
         {
             InitializeComponent();
         }
 
         private void signUP_Click(object sender, EventArgs e)
         {
-            if(INSERTRow() > 0)
-            {
-                this.Close();
-            }
+            INSERTRow();
         }
 
         private OracleConnection odpConn = new OracleConnection();
-
         private int INSERTRow()
         {
             string connectionString = "User Id=kims; Password=1234; Data Source=(DESCRIPTION = " + "(ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521))(CONNECT_DATA = (SERVER =" + "DEDICATED)(SERVICE_NAME = xe)) ); ";
@@ -38,14 +35,16 @@ namespace Having_fun_project
                 String inpw = txtPw.Text.Trim();
                 String inName = txtName.Text.Trim();
                 String inPhone = txtPhone.Text.Trim();
-                string strqry = "INSERT INTO funUser (MemberID, UserName, UserPhoneNumber, UserPassword) VALUES ('" + inid + "', '" + inName + "', '" + inPhone + "', '" + inpw + "')";
+                string strqry = "INSERT INTO Owner VALUES ('" + inid + "', '" + inName + "', '" + inpw + "', '" + inPhone + "')";
                 OracleCommand OraCmd = new OracleCommand(strqry, odpConn);
 
                 if (txtPw.Text.Trim() == txtPw2.Text.Trim())
                 {
                     int affectedRows = OraCmd.ExecuteNonQuery();
                     MessageBox.Show("회원가입이 성공적으로 완료되었습니다.");
+                    this.Close();
                     return affectedRows;
+                    
                 }
                 else
                 {
@@ -55,9 +54,5 @@ namespace Having_fun_project
             }
         }
 
-        private void user_signup_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

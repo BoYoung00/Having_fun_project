@@ -73,6 +73,7 @@
             this.Controls.Add(this.userGridView);
             this.Name = "User_view";
             this.Text = "User_view";
+            this.Load += new System.EventHandler(this.User_view_Load);
             ((System.ComponentModel.ISupportInitialize)(this.userGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

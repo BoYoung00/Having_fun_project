@@ -17,7 +17,7 @@ namespace Having_fun_project
         public User_view()
         {
             InitializeComponent();
-            dbc.DB_Open();//*
+            dbc.DB_Open_funUser();//*
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -36,6 +36,11 @@ namespace Having_fun_project
             {
                 MessageBox.Show(DE.Message);
             }
+        }
+
+        private void User_view_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

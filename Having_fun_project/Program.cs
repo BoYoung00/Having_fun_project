@@ -16,7 +16,7 @@ namespace Having_fun_project
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new User_reserve());
+            Application.Run(new user_login());
         }
     }
 }

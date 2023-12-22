@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.OracleClient;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
+using RadioButton = System.Windows.Forms.RadioButton;
 
 namespace ADOForm
 {
@@ -28,7 +30,9 @@ namespace ADOForm
             set { myCommandBuilder = value; }
         }
         public DataTable PhoneTable { get { return phoneTable; } set { phoneTable = value; } }
-        public void DB_Open()
+
+        // 회원 정보 가져오기
+        public void DB_Open_funUser()
         {
             try
             {
@@ -43,6 +47,41 @@ namespace ADOForm
                 MessageBox.Show(DE.Message);
             }
         }
+
+        // 숙박시설 정보 가져오기
+        public void DB_Open_Accommodation()
+        {
+            try
+            {
+                string connectionString = "User Id=kims; Password=1234; Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521)) (CONNECT_DATA = (SERVER = DEDICATED) (SERVICE_NAME = xe) ) );";
+                string commandString = "SELECT * FROM Accommodation";
+                DBAdapter = new OracleDataAdapter(commandString, connectionString);
+                MyCommandBuilder = new OracleCommandBuilder(DBAdapter);
+                DS = new DataSet();
+            }
+            catch (DataException DE)
+            {
+                MessageBox.Show(DE.Message);
+            }
+        }
+
+        // 예약 정보 조회
+        public void DB_Open_Reservation()
+        {
+            try
+            {
+                string connectionString = "User Id=kims; Password=1234; Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521)) (CONNECT_DATA = (SERVER = DEDICATED) (SERVICE_NAME = xe) ) );";
+                string commandString = "SELECT * FROM Reservation";
+                DBAdapter = new OracleDataAdapter(commandString, connectionString);
+                MyCommandBuilder = new OracleCommandBuilder(DBAdapter);
+                DS = new DataSet();
+            }
+            catch (DataException DE)
+            {
+                MessageBox.Show(DE.Message);
+            }
+        }
+
         public void DB_ObjCreate()
         {
             PhoneTable = new DataTable();
